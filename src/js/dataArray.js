@@ -2,6 +2,8 @@ import { createHeadlines } from './markupRender'
 import axios from 'axios';
 import Notiflix from 'notiflix';
 export let imageInfoArray = [];
+let hitsCounter;
+
 
 
 let loadMoreBtn = document.getElementById('loadMore');

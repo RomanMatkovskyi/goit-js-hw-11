@@ -10,30 +10,25 @@ loadMoreBtn.classList.add('visually-hidden');
 
 
 let currentPage;
-let hitsCounter;
 
 function onFormSubmit(event) {
   event.preventDefault();
   let inputEl = this.elements.searchQuery;
   let submitBtnEl = this.elements.submitBtn;
-
   if (inputEl.value.trim() === '') {
     Notiflix.Notify.failure('Please enter a topic to search for images.')
     return;
   }
-
   galleryEl.innerHTML = '';
   currentPage = 1;
   let imageInfoArray = [];
   getInfoArray(inputEl.value, currentPage, imageInfoArray);
 }
-
 formEl.addEventListener('submit', onFormSubmit);
-
-loadMoreBtn.addEventListener('click', loadMorePictures);
 
 function loadMorePictures() {
   currentPage++;
   let inputEl = formEl.elements.searchQuery;
   getInfoArray(inputEl.value, currentPage, imageInfoArray);
 }
+loadMoreBtn.addEventListener('click', loadMorePictures);
