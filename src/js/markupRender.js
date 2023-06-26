@@ -1,22 +1,22 @@
 let galleryEl = document.querySelector('.gallery');
 
-
 export function createHeadlines(headlines) {
-    headlines.forEach(headline => {
-      createHeadline(headline);
-    });
-  }
-  
-  function createHeadline({
-    webformatURL,
-    largeImageURL,
-    tags,
-    likes,
-    views,
-    comments,
-    downloads,
-  }) {
-    let template = `<div class="photo-card">
+  headlines.forEach(headline => {
+    createHeadline(headline);
+  });
+}
+
+function createHeadline({
+  webformatURL,
+  largeImageURL,
+  tags,
+  likes,
+  views,
+  comments,
+  downloads,
+}) {
+  let markupContainer = document.createDocumentFragment();
+  let template = `<div class="photo-card">
   <img src="${webformatURL}" alt="${tags}" class="img-photo" loading="lazy" />
   <div class="card-description">
   <ul class="info">
@@ -27,5 +27,8 @@ export function createHeadlines(headlines) {
       </ul>
       </div>
   </div>`;
-    galleryEl.insertAdjacentHTML('beforeend', template);
-  }
+  let divEl = document.createElement('div');
+  divEl.innerHTML = template;
+  markupContainer.appendChild(divEl.firstChild);
+  galleryEl.appendChild(markupContainer);
+}

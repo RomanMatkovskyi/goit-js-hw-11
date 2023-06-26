@@ -2,10 +2,8 @@ import { createHeadlines } from './markupRender'
 import axios from 'axios';
 import Notiflix from 'notiflix';
 export let imageInfoArray = [];
-let hitsCounter;
 
-
-
+let pageAmount;
 let loadMoreBtn = document.getElementById('loadMore');
 
 
@@ -24,15 +22,15 @@ export async function getInfoArray(searchData, page, imgArray) {
       });
       imageInfoArray = imgArray;
       let resObject = response.data;
-      hitsCounter = resObject.totalHits;
+      pageAmount = Math.ceil(resObject.totalHits / 40);
       imageInfoArray.push(...resObject.hits);
       if (resObject.hits.length !== 0) {
-        if (imageInfoArray.length < hitsCounter) {
+        if (Math.ceil(imageInfoArray.length / 40) <= pageAmount) {
           loadMoreBtn.classList.remove('visually-hidden');
           createHeadlines(imageInfoArray);
         } else {
           Notiflix.Notify.failure(
-            'We are sorry, but youve reached the end of search results.'
+            'We are sorry, but you have reached the end of search results.'
           );
           loadMoreBtn.classList.add('visually-hidden');
         }
@@ -40,6 +38,7 @@ export async function getInfoArray(searchData, page, imgArray) {
         Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
+        loadMoreBtn.classList.add('visually-hidden');
       }
     } catch (error) {
       console.error(error);

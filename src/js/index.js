@@ -2,12 +2,10 @@ import { getInfoArray } from './dataArray';
 import { imageInfoArray } from './dataArray';
 import Notiflix from 'notiflix';
 
-
 let formEl = document.querySelector('.search-form');
 let loadMoreBtn = document.getElementById('loadMore');
 let galleryEl = document.querySelector('.gallery');
 loadMoreBtn.classList.add('visually-hidden');
-
 
 let currentPage;
 
@@ -16,7 +14,7 @@ function onFormSubmit(event) {
   let inputEl = this.elements.searchQuery;
   let submitBtnEl = this.elements.submitBtn;
   if (inputEl.value.trim() === '') {
-    Notiflix.Notify.failure('Please enter a topic to search for images.')
+    Notiflix.Notify.failure('Please enter a topic to search for images.');
     return;
   }
   galleryEl.innerHTML = '';
